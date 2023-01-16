@@ -1,16 +1,20 @@
 Package: shinyfocus
-Title: What the Package Does (One Line, Title Case)
+Title: Use Browser Focus Events in 'shiny'
 Version: 0.0.0.9000
 Authors@R: 
     person("Jon", "Harmon", , "jonthegeek@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4781-4346"))
-Description: What the package does (one paragraph).
+Description: As a user moves through a 'shiny' app, it can be useful to trigger 
+    server events when different parts of the app gain or lose focus. This 
+    package aims to make it easy to implement such events.
 License: MIT + file LICENSE
 Suggests: 
+    covr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://github.com/r4ds/shinyfocus
+URL: https://github.com/r4ds/shinyfocus,
+    https://r4ds.github.io/shinyfocus/
 BugReports: https://github.com/r4ds/shinyfocus/issues
