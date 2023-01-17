@@ -4,7 +4,8 @@ histogramUI <- function(id) {
   tagList(
     selectInput(NS(id, "var"), "Variable", choices = names(mtcars)),
     numericInput(NS(id, "bins"), "bins", value = 10, min = 1),
-    plotOutput(NS(id, "hist"))
+    plotOutput(NS(id, "hist")),
+    shiny::verbatimTextOutput(NS(id, "testing"))
   )
 }
 
@@ -14,6 +15,16 @@ histogramServer <- function(id) {
     output$hist <- renderPlot({
       hist(data(), breaks = input$bins, main = input$var)
     }, res = 96)
+    output$testing <- renderText({
+      # root_session <- session
+      # while (inherits(root_session, "session_proxy")) {
+      #   root_session <- .subset2(root_session, "parent")
+      # }
+      # names(
+      #   root_session$input
+      # )
+      names(.subset2(session, "overrides"))
+    })
   })
 }
 
@@ -30,6 +41,20 @@ server <- function(input, output, session) {
   output$testing <- shiny::renderText(
     input[[shiny::NS("shinyfocuspkg", "active_element")]]
     # names(input)
+  )
+
+  shiny::observeEvent(
+    if (
+      !is.null(input[[shiny::NS("shinyfocuspkg", "active_element")]]) &&
+      input[[shiny::NS("shinyfocuspkg", "active_element")]] == "hist1-var-selectized"
+    ) {
+      "focused"
+    },
+    shiny::updateTextInput(
+      session,
+      "another_text",
+      value = input[[shiny::NS("shinyfocuspkg", "active_element")]]
+    )
   )
 
   shiny::observeEvent(
