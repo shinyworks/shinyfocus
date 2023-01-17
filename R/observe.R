@@ -48,7 +48,6 @@
 #'
 #' @examples
 #' if (interactive()) {
-#'
 #'   # App 1: A relatively simple ui without modules.
 #'   shiny::shinyApp(
 #'     ui = shiny::fluidPage(
@@ -80,7 +79,7 @@
 #'     )
 #'   }
 #'   changeServer <- function(id) {
-#'     moduleServer(id, function(input, output, session) {
+#'     shiny::moduleServer(id, function(input, output, session) {
 #'       observe_focus_change(
 #'         "observe_me",
 #'         output$changing <- shiny::renderText(
@@ -161,7 +160,6 @@ observe_focus_change <- function(id,
 #' @examples
 #' ## Only run examples in interactive R sessions
 #' if (interactive()) {
-#'
 #'   # App 1: A relatively simple ui without modules.
 #'   shiny::shinyApp(
 #'     ui = shiny::fluidPage(
@@ -193,7 +191,7 @@ observe_focus_change <- function(id,
 #'     )
 #'   }
 #'   focusServer <- function(id) {
-#'     moduleServer(id, function(input, output, session) {
+#'     shiny::moduleServer(id, function(input, output, session) {
 #'       observe_focus(
 #'         "observe_me",
 #'         output$focusing <- shiny::renderText(
@@ -249,7 +247,6 @@ observe_focus <- function(id,
 #' @examples
 #' ## Only run examples in interactive R sessions
 #' if (interactive()) {
-#'
 #'   # App 1: A relatively simple ui without modules.
 #'   shiny::shinyApp(
 #'     ui = shiny::fluidPage(
@@ -281,7 +278,7 @@ observe_focus <- function(id,
 #'     )
 #'   }
 #'   blurServer <- function(id) {
-#'     moduleServer(id, function(input, output, session) {
+#'     shiny::moduleServer(id, function(input, output, session) {
 #'       observe_blur(
 #'         "observe_me",
 #'         output$blurring <- shiny::renderText(
@@ -307,9 +304,9 @@ observe_focus <- function(id,
 #'   )
 #' }
 observe_blur <- function(id,
-                          ...,
-                          priority = 99999,
-                          session = shiny::getDefaultReactiveDomain()) {
+                         ...,
+                         priority = 99999,
+                         session = shiny::getDefaultReactiveDomain()) {
   return(
     observe_focus_change(
       id = id,

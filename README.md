@@ -16,8 +16,7 @@ coverage](https://codecov.io/gh/r4ds/shinyfocus/branch/main/graph/badge.svg)](ht
 
 The goal of shinyfocus is to make it easy to trigger server events in
 {shiny} apps based on elements of the app gaining or losing focus in the
-browser. This all assumes that some initial experiments prove that this
-can be done (and is useful).
+browser.
 
 ## Installation
 
@@ -28,6 +27,81 @@ You can install the development version of shinyfocus from
 # install.packages("devtools")
 devtools::install_github("r4ds/shinyfocus")
 ```
+
+## Examples
+
+I’ve envisioned two primary use cases (although I hope and assume that
+there are many others):
+
+- Showing help related to an input.
+- Validating an input when the user is “done” with an input.
+
+The app demonstrated here does both.
+
+``` r
+library(shinyfocus)
+
+ui <- shiny::fluidPage(
+  shinyfocus_js_dependency(),
+  shiny::column(
+    2,
+    shiny::textInput("name", "Name:"),
+    shiny::textInput("title", "Title:")
+  ),
+  shiny::column(
+    2,
+    shiny::textOutput("explanation")
+  )
+)
+
+server <- function(input, output, session) {
+  observe_focus(
+    "name",
+    output$explanation <- shiny::renderText({
+      "Enter the name you want me to call you. It will be converted to Title Case."
+    })
+  )
+  
+  observe_focus(
+    "title",
+    output$explanation <- shiny::renderText({
+      "Describe your role in 10 characters or fewer."
+    })
+  )
+  
+  observe_blur(
+    "name",
+    shiny::updateTextInput(
+      inputId = "name",
+      value = stringr::str_to_title(shiny::isolate(input$name))
+    )
+  )
+  
+  observe_blur(
+    "title",
+    {
+      if (nchar(input$title) > 10) {
+        shiny::updateTextInput(
+          inputId = "title",
+          value = paste(
+            "Typer of",
+            nchar(input$title),
+            "Characters"
+          )
+        )
+      }
+    }
+  )
+  
+}
+
+shiny::shinyApp(ui, server)
+```
+
+Note: I feel like the “explanation” output could be cleaner. I’d like to
+find a better way to implement the “explanatin” output, having it switch
+based on which input is selected (rather than the roundabout double
+observer). I hope to update that soon!
 
 ## Related Work
 

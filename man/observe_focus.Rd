@@ -64,7 +64,6 @@ gains focus.
 \examples{
 ## Only run examples in interactive R sessions
 if (interactive()) {
-
   # App 1: A relatively simple ui without modules.
   shiny::shinyApp(
     ui = shiny::fluidPage(
@@ -96,7 +95,7 @@ if (interactive()) {
     )
   }
   focusServer <- function(id) {
-    moduleServer(id, function(input, output, session) {
+    shiny::moduleServer(id, function(input, output, session) {
       observe_focus(
         "observe_me",
         output$focusing <- shiny::renderText(

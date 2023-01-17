@@ -67,7 +67,6 @@ gains or loses focus.
 }
 \examples{
 if (interactive()) {
-
   # App 1: A relatively simple ui without modules.
   shiny::shinyApp(
     ui = shiny::fluidPage(
@@ -99,7 +98,7 @@ if (interactive()) {
     )
   }
   changeServer <- function(id) {
-    moduleServer(id, function(input, output, session) {
+    shiny::moduleServer(id, function(input, output, session) {
       observe_focus_change(
         "observe_me",
         output$changing <- shiny::renderText(

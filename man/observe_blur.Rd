@@ -64,7 +64,6 @@ loses focus.
 \examples{
 ## Only run examples in interactive R sessions
 if (interactive()) {
-
   # App 1: A relatively simple ui without modules.
   shiny::shinyApp(
     ui = shiny::fluidPage(
@@ -96,7 +95,7 @@ if (interactive()) {
     )
   }
   blurServer <- function(id) {
-    moduleServer(id, function(input, output, session) {
+    shiny::moduleServer(id, function(input, output, session) {
       observe_blur(
         "observe_me",
         output$blurring <- shiny::renderText(

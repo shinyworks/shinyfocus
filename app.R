@@ -1,69 +1,67 @@
-library(shiny)
+# This app demonstrates some of the functionality of this package.
 
-histogramUI <- function(id) {
-  tagList(
-    selectInput(NS(id, "var"), "Variable", choices = names(mtcars)),
-    numericInput(NS(id, "bins"), "bins", value = 10, min = 1),
-    plotOutput(NS(id, "hist")),
-    shiny::verbatimTextOutput(NS(id, "testing"))
-  )
-}
+# See ?shiny::loadSupport
+options(shiny.autoload.r = FALSE)
 
-histogramServer <- function(id) {
-  moduleServer(id, function(input, output, session) {
-    data <- reactive(mtcars[[input$var]])
-    output$hist <- renderPlot({
-      hist(data(), breaks = input$bins, main = input$var)
-    }, res = 96)
-    output$testing <- renderText({
-      # root_session <- session
-      # while (inherits(root_session, "session_proxy")) {
-      #   root_session <- .subset2(root_session, "parent")
-      # }
-      # names(
-      #   root_session$input
-      # )
-      names(.subset2(session, "overrides"))
-    })
-  })
-}
-
-ui <- fluidPage(
-  shinyfocus_js_dependency(),
-  histogramUI("hist1"),
-  shiny::textInput("another_text", "More text"),
-  shiny::actionButton("go_button", "Go!"),
-  shiny::verbatimTextOutput("testing")
+pkgload::load_all(
+  export_all = FALSE,
+  helpers = FALSE,
+  attach_testthat = FALSE,
+  quiet = TRUE
 )
+
+ui <- shiny::fluidPage(
+  shinyfocus_js_dependency(),
+  shiny::column(
+    2,
+    shiny::textInput("name", "Name:"),
+    shiny::textInput("title", "Title:")
+  ),
+  shiny::column(
+    2,
+    shiny::textOutput("explanation")
+  )
+)
+
 server <- function(input, output, session) {
-  histogramServer("hist1")
-
-  output$testing <- shiny::renderText(
-    input[[shiny::NS("shinyfocuspkg", "active_element")]]
-    # names(input)
+  observe_focus(
+    "name",
+    output$explanation <- shiny::renderText({
+      "Enter the name you want me to call you. It will be converted to Title Case."
+    })
   )
 
-  shiny::observeEvent(
-    if (
-      !is.null(input[[shiny::NS("shinyfocuspkg", "active_element")]]) &&
-      input[[shiny::NS("shinyfocuspkg", "active_element")]] == "hist1-var-selectized"
-    ) {
-      "focused"
-    },
+  observe_focus(
+    "title",
+    output$explanation <- shiny::renderText({
+      "Describe your role in 10 characters or fewer."
+    })
+  )
+
+  observe_blur(
+    "name",
     shiny::updateTextInput(
-      session,
-      "another_text",
-      value = input[[shiny::NS("shinyfocuspkg", "active_element")]]
+      inputId = "name",
+      value = stringr::str_to_title(shiny::isolate(input$name))
     )
   )
 
-  shiny::observeEvent(
-    input$go_button,
-    shiny::updateTextInput(
-      session,
-      "another_text",
-      value = "new value"
-    )
+  observe_blur(
+    "title",
+    {
+      if (nchar(input$title) > 10) {
+        shiny::updateTextInput(
+          inputId = "title",
+          value = paste(
+            "Typer of",
+            nchar(input$title),
+            "Characters"
+          )
+        )
+      }
+    }
   )
+
 }
-shinyApp(ui, server)
+
+shiny::shinyApp(ui, server)
