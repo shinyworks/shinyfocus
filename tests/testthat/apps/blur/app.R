@@ -1,4 +1,4 @@
-pkgload::load_all(".")
+library(shinyfocus)
 
 changeUI <- function(id) {
   shiny::tagList(

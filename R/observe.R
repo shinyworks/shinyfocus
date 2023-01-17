@@ -16,13 +16,17 @@
 
 .active_element <- function(session = shiny::getDefaultReactiveDomain()) {
   return(
-    .root_session(session)$input[[shiny::NS("shinyfocuspkg", "active_element")]]
+    .root_session(session)$input[[
+      shiny::NS("shinyfocuspkg", "active_element")
+    ]]
   )
 }
 
 .previous_element <- function(session = shiny::getDefaultReactiveDomain()) {
   return(
-    .root_session(session)$input[[shiny::NS("shinyfocuspkg", "previous_element")]]
+    .root_session(session)$input[[
+      shiny::NS("shinyfocuspkg", "previous_element")
+    ]]
   )
 }
 
