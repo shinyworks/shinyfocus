@@ -34,6 +34,11 @@ You can install the development version of shinyfocus from [GitHub](https://gith
 devtools::install_github("r4ds/shinyfocus")
 ```
 
+## Related Work
+
+-   {[shinyjs](https://deanattali.com/shinyjs/)} has a function, `onevent()`, that can be used for similar functionality.
+However, that implementation is different than what we do here.
+
 ## Code of Conduct
 
 Please note that the shinyfocus project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
