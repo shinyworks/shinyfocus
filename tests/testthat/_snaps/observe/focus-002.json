@@ -1,0 +1,15 @@
+{
+  "input": {
+    "another_input": "",
+    "change_module-observe_me": "",
+    "go_button": 0,
+    "shinyfocuspkg-active_element": "change_module-observe_me",
+    "shinyfocuspkg-previous_element": ""
+  },
+  "output": {
+    "change_module-changing": "You entered observe_me! Here's a random number: 0.720903896261007"
+  },
+  "export": {
+
+  }
+}
