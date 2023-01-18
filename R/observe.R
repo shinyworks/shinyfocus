@@ -14,6 +14,13 @@
   return(session)
 }
 
+#' Read the active_element from root input
+#'
+#' @inheritParams .root_session
+#'
+#' @return The value of `shinyfocuspkg-active_element` as a character scalar (or
+#'   NULL).
+#' @keywords internal
 .active_element <- function(session = shiny::getDefaultReactiveDomain()) {
   return(
     .root_session(session)$input[[
@@ -22,6 +29,13 @@
   )
 }
 
+#' Read the previous_element from root input
+#'
+#' @inheritParams .root_session
+#'
+#' @return The value of `shinyfocuspkg-previous_element` as a character scalar
+#'   (or NULL).
+#' @keywords internal
 .previous_element <- function(session = shiny::getDefaultReactiveDomain()) {
   return(
     .root_session(session)$input[[
@@ -35,16 +49,19 @@
 #' Set up a [shiny::observeEvent()] observer to trigger when the named input
 #' gains or loses focus.
 #'
-#' @inheritDotParams shiny::observeEvent handlerExpr handler.env handler.quoted
-#'   label suspended domain autoDestroy ignoreNULL ignoreInit once
+#' @inheritDotParams shiny::observeEvent label suspended autoDestroy ignoreNULL
+#'   ignoreInit once
 #' @param id The ID string of an input.
+#' @param handler_expr The expression to call whenever the specified input
+#'   changes focus. This expression is quoted and executed in the calling
+#'   environment.
 #' @param change_on A character indicating whether the observer should update
 #'   when the input becomes focused and/or when the input becomes blurred.
 #' @param priority An integer that controls the priority with which the observer
 #'   should be executed. It often makes sense for this priority to be very high
 #'   to avoid conflicts.
-#' @param session The session in which the observer will be created. The default
-#'   is almost always desired.
+#' @param session The session (aka domain) in which the observer will be created
+#'   and executed. The default is almost always desired.
 #'
 #' @return A shiny observer (see [shiny::observe()]).
 #' @export
@@ -63,7 +80,7 @@
 #'     ),
 #'     server = function(input, output, session) {
 #'       # Update the value in "changing" whenever input1 gains or loses focus.
-#'       observe_focus_change(
+#'       on_focus_change(
 #'         "input1",
 #'         output$changing <- shiny::renderText(
 #'           paste(
@@ -84,7 +101,7 @@
 #'   }
 #'   changeServer <- function(id) {
 #'     shiny::moduleServer(id, function(input, output, session) {
-#'       observe_focus_change(
+#'       on_focus_change(
 #'         "observe_me",
 #'         output$changing <- shiny::renderText(
 #'           paste(
@@ -108,12 +125,14 @@
 #'     }
 #'   )
 #' }
-observe_focus_change <- function(id,
-                                 ...,
-                                 change_on = c("focus", "blur"),
-                                 priority = 99999,
-                                 session = shiny::getDefaultReactiveDomain()) {
+on_focus_change <- function(id,
+                            handler_expr,
+                            ...,
+                            change_on = c("focus", "blur"),
+                            priority = 99999,
+                            session = shiny::getDefaultReactiveDomain()) {
   change_on <- match.arg(change_on, several.ok = TRUE)
+  handler_expr <- rlang::enquo(handler_expr)
   value_focused <- NULL
   value_blurred <- NULL
 
@@ -124,27 +143,23 @@ observe_focus_change <- function(id,
     value_blurred <- "blurred"
   }
 
-  shiny::withReactiveDomain(
-    session,
-    {
-      # Define input and output in case they're referenced in the handler.
-      input <- session$input
-      output <- session$output
-
-      shiny::observeEvent(
-        {
-          if (!is.null(.active_element())) {
-            if (.active_element() == session$ns(id)) {
-              value_focused
-            } else if (.previous_element() == session$ns(id)) {
-              value_blurred
-            }
+  return(
+    shiny::observeEvent(
+      {
+        if (!is.null(.active_element())) {
+          if (.active_element() == session$ns(id)) {
+            value_focused
+          } else if (.previous_element() == session$ns(id)) {
+            value_blurred
           }
-        },
-        priority = priority,
-        ...
-      )
-    }
+        }
+      },
+      handlerExpr = handler_expr,
+      handler.quoted = TRUE,
+      priority = priority,
+      domain = session,
+      ...
+    )
   )
 }
 
@@ -153,9 +168,11 @@ observe_focus_change <- function(id,
 #' Set up a [shiny::observeEvent()] observer to trigger when the named input
 #' gains focus.
 #'
-#' @inheritParams observe_focus_change
-#' @inheritDotParams shiny::observeEvent handlerExpr handler.env handler.quoted
-#'   label suspended domain autoDestroy ignoreNULL ignoreInit once
+#' @inheritParams on_focus_change
+#' @inheritDotParams shiny::observeEvent label suspended autoDestroy ignoreNULL
+#'   ignoreInit once
+#' @param handler_expr The expression to call whenever the specified input gains
+#'   focus. This expression is quoted and executed in the calling environment.
 #'
 #' @return A shiny observer (see [shiny::observe()]).
 #' @export
@@ -175,7 +192,7 @@ observe_focus_change <- function(id,
 #'     ),
 #'     server = function(input, output, session) {
 #'       # Update the value in focusing whenever input1 has focus.
-#'       observe_focus(
+#'       on_focus(
 #'         "input1",
 #'         output$focusing <- shiny::renderText(
 #'           paste(
@@ -196,7 +213,7 @@ observe_focus_change <- function(id,
 #'   }
 #'   focusServer <- function(id) {
 #'     shiny::moduleServer(id, function(input, output, session) {
-#'       observe_focus(
+#'       on_focus(
 #'         "observe_me",
 #'         output$focusing <- shiny::renderText(
 #'           paste(
@@ -220,13 +237,15 @@ observe_focus_change <- function(id,
 #'     }
 #'   )
 #' }
-observe_focus <- function(id,
-                          ...,
-                          priority = 99999,
-                          session = shiny::getDefaultReactiveDomain()) {
+on_focus <- function(id,
+                     handler_expr,
+                     ...,
+                     priority = 99999,
+                     session = shiny::getDefaultReactiveDomain()) {
   return(
-    observe_focus_change(
+    on_focus_change(
       id = id,
+      handler_expr = handler_expr,
       ...,
       change_on = "focus",
       priority = priority,
@@ -240,9 +259,11 @@ observe_focus <- function(id,
 #' Set up a [shiny::observeEvent()] observer to trigger when the named input
 #' loses focus.
 #'
-#' @inheritParams observe_focus_change
-#' @inheritDotParams shiny::observeEvent handlerExpr handler.env handler.quoted
-#'   label suspended domain autoDestroy ignoreNULL ignoreInit once
+#' @inheritParams on_focus_change
+#' @inheritDotParams shiny::observeEvent label suspended autoDestroy ignoreNULL
+#'   ignoreInit once
+#' @param handler_expr The expression to call whenever the specified input loses
+#'   focus. This expression is quoted and executed in the calling environment.
 #'
 #' @return A shiny observer (see [shiny::observe()]).
 #' @export
@@ -262,7 +283,7 @@ observe_focus <- function(id,
 #'     ),
 #'     server = function(input, output, session) {
 #'       # Update the value in blurring whenever input1 loses focus.
-#'       observe_blur(
+#'       on_blur(
 #'         "input1",
 #'         output$blurring <- shiny::renderText(
 #'           paste(
@@ -283,7 +304,7 @@ observe_focus <- function(id,
 #'   }
 #'   blurServer <- function(id) {
 #'     shiny::moduleServer(id, function(input, output, session) {
-#'       observe_blur(
+#'       on_blur(
 #'         "observe_me",
 #'         output$blurring <- shiny::renderText(
 #'           paste(
@@ -307,13 +328,15 @@ observe_focus <- function(id,
 #'     }
 #'   )
 #' }
-observe_blur <- function(id,
-                         ...,
-                         priority = 99999,
-                         session = shiny::getDefaultReactiveDomain()) {
+on_blur <- function(id,
+                    handler_expr,
+                    ...,
+                    priority = 99999,
+                    session = shiny::getDefaultReactiveDomain()) {
   return(
-    observe_focus_change(
+    on_focus_change(
       id = id,
+      handler_expr = handler_expr,
       ...,
       change_on = "blur",
       priority = priority,

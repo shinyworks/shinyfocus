@@ -55,21 +55,21 @@ ui <- shiny::fluidPage(
 )
 
 server <- function(input, output, session) {
-  observe_focus(
+  on_focus(
     "name",
     output$explanation <- shiny::renderText({
       "Enter the name you want me to call you. It will be converted to Title Case."
     })
   )
   
-  observe_focus(
+  on_focus(
     "title",
     output$explanation <- shiny::renderText({
       "Describe your role in 10 characters or fewer."
     })
   )
   
-  observe_blur(
+  on_blur(
     "name",
     shiny::updateTextInput(
       inputId = "name",
@@ -77,7 +77,7 @@ server <- function(input, output, session) {
     )
   )
   
-  observe_blur(
+  on_blur(
     "title",
     {
       if (nchar(input$title) > 10) {

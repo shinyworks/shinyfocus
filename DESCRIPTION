@@ -13,6 +13,7 @@ URL: https://github.com/r4ds/shinyfocus,
 BugReports: https://github.com/r4ds/shinyfocus/issues
 Imports: 
     htmltools,
+    rlang,
     shiny
 Suggests: 
     covr,

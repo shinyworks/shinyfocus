@@ -1,3 +1,6 @@
+## Note: These tests don't actually test that the JavaScript works correctly on
+## click, but everything downstream of the JavaScript is tested.
+
 library(shinytest2)
 
 test_that("change app works", {
@@ -167,6 +170,16 @@ test_that("blur app works", {
   app$set_inputs(
     `shinyfocuspkg-active_element` = "change_module-observe_me",
     allow_no_input_binding_ = TRUE
+  )
+  app$expect_values(screenshot_args = FALSE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE,
+    wait_ = FALSE
   )
   app$expect_values(screenshot_args = FALSE)
 })
