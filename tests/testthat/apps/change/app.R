@@ -3,12 +3,12 @@ library(shinyfocus)
 changeUI <- function(id) {
   shiny::tagList(
     shiny::textInput(shiny::NS(id, "observe_me"), "Observe me"),
-    shiny::textOutput(NS(id, "changing"))
+    shiny::textOutput(shiny::NS(id, "changing"))
   )
 }
 changeServer <- function(id) {
   moduleServer(id, function(input, output, session) {
-    observe_focus_change(
+    on_focus_change(
       "observe_me",
       output$changing <- shiny::renderText(
         paste(
