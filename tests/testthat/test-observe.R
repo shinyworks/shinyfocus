@@ -13,20 +13,47 @@ test_that("change app works", {
   on.exit(app$stop())
 
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "change_module-observe_me", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "change_module-observe_me", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "another_input", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "another_input", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "go_button", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "go_button",
+    allow_no_input_binding_ = TRUE
+  )
   app$click("go_button")
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "go_button", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "another_input", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "go_button",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "another_input", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "change_module-observe_me", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
 })
 
@@ -43,20 +70,47 @@ test_that("focus app works", {
   on.exit(app$stop())
 
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "change_module-observe_me", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "change_module-observe_me", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "another_input", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "another_input", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "go_button", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "go_button",
+    allow_no_input_binding_ = TRUE
+  )
   app$click("go_button")
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "go_button", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "another_input", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "go_button",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "another_input", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "change_module-observe_me", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
 })
 
@@ -73,19 +127,46 @@ test_that("blur app works", {
   on.exit(app$stop())
 
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "change_module-observe_me", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "change_module-observe_me", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "another_input", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "another_input", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "go_button", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "go_button",
+    allow_no_input_binding_ = TRUE
+  )
   app$click("go_button")
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "go_button", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "another_input", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "go_button",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
-  app$set_inputs(`shinyfocuspkg-previous_element` = "another_input", allow_no_input_binding_ = TRUE)
-  app$set_inputs(`shinyfocuspkg-active_element` = "change_module-observe_me", allow_no_input_binding_ = TRUE)
+  app$set_inputs(
+    `shinyfocuspkg-previous_element` = "another_input",
+    allow_no_input_binding_ = TRUE
+  )
+  app$set_inputs(
+    `shinyfocuspkg-active_element` = "change_module-observe_me",
+    allow_no_input_binding_ = TRUE
+  )
   app$expect_values(screenshot_args = FALSE)
 })
