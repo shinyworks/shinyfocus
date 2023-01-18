@@ -25,7 +25,19 @@
     <loc>https://r4ds.github.io/shinyfocus/index.html</loc>
   </url>
   <url>
+    <loc>https://r4ds.github.io/shinyfocus/reference/dot-root_session.html</loc>
+  </url>
+  <url>
     <loc>https://r4ds.github.io/shinyfocus/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://r4ds.github.io/shinyfocus/reference/observe_blur.html</loc>
+  </url>
+  <url>
+    <loc>https://r4ds.github.io/shinyfocus/reference/observe_focus.html</loc>
+  </url>
+  <url>
+    <loc>https://r4ds.github.io/shinyfocus/reference/observe_focus_change.html</loc>
   </url>
   <url>
     <loc>https://r4ds.github.io/shinyfocus/reference/shinyfocus_js_dependency.html</loc>
