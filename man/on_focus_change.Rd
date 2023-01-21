@@ -16,7 +16,7 @@ on_focus_change(
 \arguments{
 \item{id}{The ID string of an input.}
 
-\item{handler_expr}{The expression to call whenever the specified input
+\item{handler_expr}{The expression to trigger whenever the specified input
 changes focus. This expression is quoted and executed in the calling
 environment.}
 

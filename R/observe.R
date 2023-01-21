@@ -60,7 +60,7 @@
 #' @inheritDotParams shiny::observeEvent label suspended autoDestroy ignoreNULL
 #'   ignoreInit once
 #' @param id The ID string of an input.
-#' @param handler_expr The expression to call whenever the specified input
+#' @param handler_expr The expression to trigger whenever the specified input
 #'   changes focus. This expression is quoted and executed in the calling
 #'   environment.
 #' @param change_on A character indicating whether the observer should update
@@ -179,8 +179,9 @@ on_focus_change <- function(id,
 #' @inheritParams on_focus_change
 #' @inheritDotParams shiny::observeEvent label suspended autoDestroy ignoreNULL
 #'   ignoreInit once
-#' @param handler_expr The expression to call whenever the specified input gains
-#'   focus. This expression is quoted and executed in the calling environment.
+#' @param handler_expr The expression to trigger whenever the specified input
+#'   gains focus. This expression is quoted and executed in the calling
+#'   environment.
 #'
 #' @return A shiny observer (see [shiny::observe()]).
 #' @export
@@ -270,8 +271,9 @@ on_focus <- function(id,
 #' @inheritParams on_focus_change
 #' @inheritDotParams shiny::observeEvent label suspended autoDestroy ignoreNULL
 #'   ignoreInit once
-#' @param handler_expr The expression to call whenever the specified input loses
-#'   focus. This expression is quoted and executed in the calling environment.
+#' @param handler_expr The expression to trigger whenever the specified input
+#'   loses focus. This expression is quoted and executed in the calling
+#'   environment.
 #'
 #' @return A shiny observer (see [shiny::observe()]).
 #' @export

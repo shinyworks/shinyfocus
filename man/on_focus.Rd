@@ -15,8 +15,9 @@ on_focus(
 \arguments{
 \item{id}{The ID string of an input.}
 
-\item{handler_expr}{The expression to call whenever the specified input gains
-focus. This expression is quoted and executed in the calling environment.}
+\item{handler_expr}{The expression to trigger whenever the specified input
+gains focus. This expression is quoted and executed in the calling
+environment.}
 
 \item{...}{
   Arguments passed on to \code{\link[shiny:observeEvent]{shiny::observeEvent}}
