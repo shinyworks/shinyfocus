@@ -45,7 +45,7 @@ gains focus."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
     </div>
 
     <div class="ref-description section level2">
-    <p>Set up a <code><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">shiny::observeEvent()</a></code> observer to trigger when the named input
+    <p>Set up a <code><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">shiny::observeEvent()</a></code> observer to trigger when the named input
 gains focus.</p>
     </div>
 
@@ -56,7 +56,7 @@ gains focus.</p>
 <span>  <span class="va">handler_expr</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  priority <span class="op">=</span> <span class="fl">99999</span>,</span>
-<span>  session <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  session <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -67,12 +67,13 @@ gains focus.</p>
 
 
 <dt>handler_expr</dt>
-<dd><p>The expression to call whenever the specified input gains
-focus. This expression is quoted and executed in the calling environment.</p></dd>
+<dd><p>The expression to trigger whenever the specified input
+gains focus. This expression is quoted and executed in the calling
+environment.</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Arguments passed on to <code><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">shiny::observeEvent</a></code></p><dl><dt><code>label</code></dt>
+<dd><p>Arguments passed on to <code><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">shiny::observeEvent</a></code></p><dl><dt><code>label</code></dt>
 <dd><p>A label for the observer or reactive, useful for debugging.</p></dd>
 
     <dt><code>suspended</code></dt>
@@ -85,8 +86,8 @@ automatically destroyed when its domain (if any) ends.</p></dd>
 
     <dt><code>ignoreNULL</code></dt>
 <dd><p>Whether the action should be triggered (or value
-calculated, in the case of <code>eventReactive</code>) when the input is
-<code>NULL</code>. See Details.</p></dd>
+calculated, in the case of <code>eventReactive</code>) when the input event expression
+is <code>NULL</code>. See Details.</p></dd>
 
     <dt><code>once</code></dt>
 <dd><p>Whether this <code>observeEvent</code> should be immediately destroyed
@@ -113,7 +114,7 @@ and executed. The default is almost always desired.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A shiny observer (see <code><a href="https://shiny.rstudio.com/reference/shiny/latest/observe.html" class="external-link">shiny::observe()</a></code>).</p>
+<p>A shiny observer (see <code><a href="https://rdrr.io/pkg/shiny/man/observe.html" class="external-link">shiny::observe()</a></code>).</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -127,19 +128,19 @@ and executed. The default is almost always desired.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Only run examples in interactive R sessions</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="co"># App 1: A relatively simple ui without modules.</span></span></span>
-<span class="r-in"><span>  <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    ui <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    ui <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>      <span class="fu"><a href="shinyfocus_js_dependency.html">shinyfocus_js_dependency</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textInput.html" class="external-link">textInput</a></span><span class="op">(</span><span class="st">"input1"</span>, <span class="st">"Input 1"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textInput.html" class="external-link">textInput</a></span><span class="op">(</span><span class="st">"input2"</span>, <span class="st">"Input 2"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"go_button"</span>, <span class="st">"Go!"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="st">"focusing"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textInput.html" class="external-link">textInput</a></span><span class="op">(</span><span class="st">"input1"</span>, <span class="st">"Input 1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textInput.html" class="external-link">textInput</a></span><span class="op">(</span><span class="st">"input2"</span>, <span class="st">"Input 2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"go_button"</span>, <span class="st">"Go!"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="st">"focusing"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
 <span class="r-in"><span>    server <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="co"># Update the value in focusing whenever input1 has focus.</span></span></span>
 <span class="r-in"><span>      <span class="fu">on_focus</span><span class="op">(</span></span></span>
 <span class="r-in"><span>        <span class="st">"input1"</span>,</span></span>
-<span class="r-in"><span>        <span class="va">output</span><span class="op">$</span><span class="va">focusing</span> <span class="op">&lt;-</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderPrint.html" class="external-link">renderText</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="va">output</span><span class="op">$</span><span class="va">focusing</span> <span class="op">&lt;-</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html" class="external-link">renderText</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>            <span class="st">"You entered input1 at"</span>,</span></span>
 <span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -152,15 +153,15 @@ and executed. The default is almost always desired.</p></dd>
 <span class="r-in"><span>  <span class="co"># App 2: With module.</span></span></span>
 <span class="r-in"><span>  <span class="va">focusUI</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>    <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/tagList.html" class="external-link">tagList</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textInput.html" class="external-link">textInput</a></span><span class="op">(</span><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/NS.html" class="external-link">NS</a></span><span class="op">(</span><span class="va">id</span>, <span class="st">"observe_me"</span><span class="op">)</span>, <span class="st">"Observe me"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="fu">NS</span><span class="op">(</span><span class="va">id</span>, <span class="st">"focusing"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textInput.html" class="external-link">textInput</a></span><span class="op">(</span><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/NS.html" class="external-link">NS</a></span><span class="op">(</span><span class="va">id</span>, <span class="st">"observe_me"</span><span class="op">)</span>, <span class="st">"Observe me"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="fu">NS</span><span class="op">(</span><span class="va">id</span>, <span class="st">"focusing"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
 <span class="r-in"><span>  <span class="va">focusServer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/moduleServer.html" class="external-link">moduleServer</a></span><span class="op">(</span><span class="va">id</span>, <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/moduleServer.html" class="external-link">moduleServer</a></span><span class="op">(</span><span class="va">id</span>, <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">on_focus</span><span class="op">(</span></span></span>
 <span class="r-in"><span>        <span class="st">"observe_me"</span>,</span></span>
-<span class="r-in"><span>        <span class="va">output</span><span class="op">$</span><span class="va">focusing</span> <span class="op">&lt;-</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderPrint.html" class="external-link">renderText</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="va">output</span><span class="op">$</span><span class="va">focusing</span> <span class="op">&lt;-</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html" class="external-link">renderText</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>            <span class="st">"You entered observe_me at"</span>,</span></span>
 <span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -170,12 +171,12 @@ and executed. The default is almost always desired.</p></dd>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    ui <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    ui <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>      <span class="fu"><a href="shinyfocus_js_dependency.html">shinyfocus_js_dependency</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>      <span class="fu">focusUI</span><span class="op">(</span><span class="st">"focus_module"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textInput.html" class="external-link">textInput</a></span><span class="op">(</span><span class="st">"another_input"</span>, <span class="st">"Another input"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"go_button"</span>, <span class="st">"Go!"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textInput.html" class="external-link">textInput</a></span><span class="op">(</span><span class="st">"another_input"</span>, <span class="st">"Another input"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"go_button"</span>, <span class="st">"Go!"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
 <span class="r-in"><span>    server <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">focusServer</span><span class="op">(</span><span class="st">"focus_module"</span><span class="op">)</span></span></span>
