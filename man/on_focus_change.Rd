@@ -29,8 +29,8 @@ environment.}
     \item{\code{autoDestroy}}{If \code{TRUE} (the default), the observer will be
 automatically destroyed when its domain (if any) ends.}
     \item{\code{ignoreNULL}}{Whether the action should be triggered (or value
-calculated, in the case of \code{eventReactive}) when the input is
-\code{NULL}. See Details.}
+calculated, in the case of \code{eventReactive}) when the input event expression
+is \code{NULL}. See Details.}
     \item{\code{once}}{Whether this \code{observeEvent} should be immediately destroyed
 after the first time that the code in \code{handlerExpr} is run. This
 pattern is useful when you want to subscribe to a event that should only
