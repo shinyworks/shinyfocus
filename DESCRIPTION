@@ -8,9 +8,9 @@ Description: As a user moves through a 'shiny' app, it can be useful to
     trigger server events when different parts of the app gain or lose
     focus. This package aims to make it easy to implement such events.
 License: MIT + file LICENSE
-URL: https://github.com/r4ds/shinyfocus,
-    https://r4ds.github.io/shinyfocus/
-BugReports: https://github.com/r4ds/shinyfocus/issues
+URL: https://shinyworks.github.io/shinyfocus/,
+    https://github.com/shinyworks/shinyfocus
+BugReports: https://github.com/shinyworks/shinyfocus/issues
 Imports: 
     htmltools,
     rlang,
