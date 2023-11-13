@@ -10,8 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/shinyfocus)](https://CRAN.R-project.org/package=shinyfocus)
 [![Codecov test
-coverage](https://codecov.io/gh/r4ds/shinyfocus/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r4ds/shinyfocus?branch=main)
-[![R-CMD-check](https://github.com/r4ds/shinyfocus/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r4ds/shinyfocus/actions/workflows/R-CMD-check.yaml)
+coverage](https://codecov.io/gh/shinyworks/shinyfocus/branch/main/graph/badge.svg)](https://app.codecov.io/gh/shinyworks/shinyfocus?branch=main)
+[![R-CMD-check](https://github.com/shinyworks/shinyfocus/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/shinyworks/shinyfocus/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of shinyfocus is to make it easy to trigger server events in
@@ -24,8 +24,8 @@ You can install the development version of shinyfocus from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("r4ds/shinyfocus")
+# install.packages("pak")
+pak::pak("shinyworks/shinyfocus")
 ```
 
 ## Examples
